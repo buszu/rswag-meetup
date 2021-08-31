@@ -11,6 +11,8 @@ gem 'dry-validation', '~> 1.6'
 gem 'jbuilder', '~> 2.7'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'sass-rails', '>= 6'
 gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
@@ -25,6 +27,7 @@ group :development, :test do
   gem 'pry', '~> 0.13.0'
   gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', '~> 5.0'
+  gem 'rswag-specs'
 end
 
 group :development do
