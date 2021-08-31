@@ -1,0 +1,43 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  DisplayCopNames: true
+  ExtraDetails: true
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 2.7.4
+  Exclude:
+    - bin/**/*
+    - node_modules/**/*
+    - vendor/**/*
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/development.rb
+    - config/environments/production.rb
+    - config/routes/**/*
+    - db/migrate/**/*
+    - spec/factories/**/*
+    - spec/**/*_spec.rb
+    - spec/swagger_helper.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
