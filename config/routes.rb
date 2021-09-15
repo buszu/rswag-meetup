@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       root to: 'about#show'
       resource :about, only: :show, controller: :about
+
+      resources :beboks, only: %i[index create]
     end
   end
 end

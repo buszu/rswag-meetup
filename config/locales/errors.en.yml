@@ -1,0 +1,9 @@
+en:
+  errors:
+    api:
+      not_found:
+        default_message: 'Resource not found'
+        model: "Couldn't find %{klass}"
+        model_by: "Couldn't find %{klass} with %{by} = %{value}"
+      validation_failed:
+        default_message: 'Validation failed'
