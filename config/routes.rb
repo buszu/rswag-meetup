@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       root to: 'about#show'
       resource :about, only: :show, controller: :about
 
-      resources :beboks, only: %i[index create]
+      resources :beboks, only: %i[index create update destroy]
     end
   end
 end
