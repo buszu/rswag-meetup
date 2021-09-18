@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "required": [
+    "bebok"
+  ],
+  "properties": {
+    "bebok": {
+      "type": "object",
+      "required": [
+        "heart",
+        "id",
+        "mood",
+        "name"
+      ],
+      "properties": {
+        "heart": {
+          "$ref": "#/components/schemas/heart_schema/properties/heart"
+        },
+        "id": { "type": "integer" },
+        "mood": {
+          "$ref": "#/components/schemas/bebok_moods_enum"
+        },
+        "name": { "type": "string" }
+      }
+    }
+  }
+}
