@@ -8,6 +8,8 @@ RSpec.describe 'api/v1/beboks#index', type: :request do
     get('list beboks') do
       tags 'Beboks'
 
+      security [beboks_registry_auth: []]
+
       produces 'application/json'
 
       parameter name: :mood,
@@ -20,6 +22,8 @@ RSpec.describe 'api/v1/beboks#index', type: :request do
 
       response(200, 'successful') do
         schema '$ref': '#/components/schemas/beboks_schema'
+
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
 
         run_test!
       end
