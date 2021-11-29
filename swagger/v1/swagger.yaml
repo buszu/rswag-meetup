@@ -93,6 +93,61 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/beboks_schema"
+  "/api/v1/beboks/{id}":
+    patch:
+      summary: update bebok data
+      tags:
+      - Beboks
+      parameters:
+      - name: id
+        in: path
+        description: ID of the bebok that will be updated
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/bebok_schema"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_schema"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 150
+                mood:
+                  type: string
+                  enum:
+                  - sad
+                  - tranquilo
+                heart:
+                  type: object
+                  required:
+                  - color
+                  - bpm
+                  properties:
+                    color:
+                      type: string
+                      enum:
+                      - blue
+                      - gamma
+                      - red
+                    bpm:
+                      type: integer
+                      minimum: 1
 servers:
 - url: http://localhost:3000
   description: Localhost
@@ -135,6 +190,15 @@ components:
       - focused
       - sad
       - tranquilo
+    error_schema:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+        details:
+          type: object
     heart_schema:
       type: object
       required:
