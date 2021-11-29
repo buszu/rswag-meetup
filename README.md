@@ -5,3 +5,4 @@
 2. CRUD for beboks and create spec
 3. Beboks - index spec
 4. Beboks - update spec
+5. Beboks - destroy spec
