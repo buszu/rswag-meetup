@@ -33,6 +33,7 @@ RSpec.configure do |config|
             type: 'string',
             enum: Constants::Beboks::Moods::LIST
           },
+          error_schema: parse_swagger_schema('error_schema'),
           heart_schema: parse_swagger_schema('heart_schema'),
           heart_colors_enum: {
             type: 'string',
