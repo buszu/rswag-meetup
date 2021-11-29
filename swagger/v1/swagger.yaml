@@ -24,6 +24,107 @@ paths:
                     type: string
                   version:
                     type: string
+  "/api/v1/beboks":
+    post:
+      summary: add a bebok to registry
+      tags:
+      - Beboks
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/bebok_schema"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - mood
+              - heart
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 150
+                mood:
+                  type: string
+                  enum:
+                  - sad
+                  - tranquilo
+                heart:
+                  type: object
+                  required:
+                  - color
+                  - bpm
+                  properties:
+                    color:
+                      type: string
+                      enum:
+                      - blue
+                      - gamma
+                      - red
+                    bpm:
+                      type: integer
+                      minimum: 1
 servers:
 - url: http://localhost:3000
   description: Localhost
+components:
+  schemas:
+    bebok_schema:
+      type: object
+      required:
+      - bebok
+      properties:
+        bebok:
+          type: object
+          required:
+          - heart
+          - id
+          - mood
+          - name
+          properties:
+            heart:
+              "$ref": "#/components/schemas/heart_schema/properties/heart"
+            id:
+              type: integer
+            mood:
+              "$ref": "#/components/schemas/bebok_moods_enum"
+            name:
+              type: string
+    bebok_moods_enum:
+      type: string
+      enum:
+      - angry
+      - focused
+      - sad
+      - tranquilo
+    heart_schema:
+      type: object
+      required:
+      - heart
+      properties:
+        heart:
+          type: object
+          required:
+          - bpm
+          - color
+          - id
+          properties:
+            id:
+              type: integer
+            bpm:
+              type: integer
+            color:
+              "$ref": "#/components/schemas/heart_colors_enum"
+    heart_colors_enum:
+      type: string
+      enum:
+      - blue
+      - gamma
+      - red

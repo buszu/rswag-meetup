@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [
+    "heart"
+  ],
+  "properties": {
+    "heart": {
+      "type": "object",
+      "required": [
+        "bpm",
+        "color",
+        "id"
+      ],
+      "properties": {
+        "id": { "type": "integer" },
+        "bpm": { "type": "integer" },
+        "color": {
+          "$ref": "#/components/schemas/heart_colors_enum"
+        }
+      }
+    }
+  }
+}

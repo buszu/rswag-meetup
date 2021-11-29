@@ -4,7 +4,7 @@ module API
   module V1
     class BeboksController < BaseController
       def index
-        scope = Bebok.all
+        scope = Bebok.all.includes(:heart)
         beboks = Beboks::IndexFilter.new.call(scope, params)
 
         render json: BebokBlueprint.render(beboks, root: :beboks)

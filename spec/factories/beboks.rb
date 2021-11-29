@@ -4,7 +4,7 @@ require 'constants/beboks/moods'
 
 FactoryBot.define do
   factory :bebok do
-    name { 'Bebok jeden' }
-    mood { 'happy' }
+    name { 'Maciej' }
+    mood { Constants::Beboks::Moods::TRANQUILO }
   end
 end
