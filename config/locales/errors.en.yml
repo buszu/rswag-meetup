@@ -5,5 +5,7 @@ en:
         default_message: 'Resource not found'
         model: "Couldn't find %{klass}"
         model_by: "Couldn't find %{klass} with %{by} = %{value}"
+      unauthorized:
+        default_message: 'Unauthorized'
       validation_failed:
         default_message: 'Validation failed'

@@ -7,6 +7,8 @@ RSpec.describe 'api/v1/beboks#destroy', type: :request do
     delete('delete bebok data') do
       tags 'Beboks'
 
+      security [beboks_registry_auth: []]
+
       produces 'application/json'
 
       parameter name: :id,
@@ -20,6 +22,7 @@ RSpec.describe 'api/v1/beboks#destroy', type: :request do
         let!(:heart) { create(:heart, bebok: bebok) }
         let(:bebok) { create(:bebok) }
 
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
         let(:id) { bebok.id }
 
         run_test!
@@ -28,6 +31,7 @@ RSpec.describe 'api/v1/beboks#destroy', type: :request do
       response(404, 'not found') do
         schema '$ref': '#/components/schemas/error_schema'
 
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
         let(:id) { 1 }
 
         let(:expected_error) do

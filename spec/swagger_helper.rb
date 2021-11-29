@@ -26,6 +26,13 @@ RSpec.configure do |config|
         }
       ],
       components: {
+        securitySchemes: {
+          beboks_registry_auth: {
+            type: :apiKey,
+            in: :header,
+            name: 'BeboksRegistryToken'
+          }
+        },
         schemas: {
           bebok_schema: parse_swagger_schema('bebok_schema'),
           beboks_schema: parse_swagger_schema('beboks_schema'),

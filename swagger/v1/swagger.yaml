@@ -9,6 +9,8 @@ paths:
       summary: show info about the application
       tags:
       - About
+      security:
+      - beboks_registry_auth: []
       responses:
         '200':
           description: successful
@@ -29,6 +31,8 @@ paths:
       summary: add a bebok to registry
       tags:
       - Beboks
+      security:
+      - beboks_registry_auth: []
       parameters: []
       responses:
         '201':
@@ -75,6 +79,8 @@ paths:
       summary: list beboks
       tags:
       - Beboks
+      security:
+      - beboks_registry_auth: []
       parameters:
       - name: mood
         required: false
@@ -98,6 +104,8 @@ paths:
       summary: delete bebok data
       tags:
       - Beboks
+      security:
+      - beboks_registry_auth: []
       parameters:
       - name: id
         in: path
@@ -118,6 +126,8 @@ paths:
       summary: update bebok data
       tags:
       - Beboks
+      security:
+      - beboks_registry_auth: []
       parameters:
       - name: id
         in: path
@@ -172,6 +182,11 @@ servers:
 - url: http://localhost:3000
   description: Localhost
 components:
+  securitySchemes:
+    beboks_registry_auth:
+      type: apiKey
+      in: header
+      name: BeboksRegistryToken
   schemas:
     bebok_schema:
       type: object

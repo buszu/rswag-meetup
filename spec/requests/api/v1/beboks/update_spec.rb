@@ -9,6 +9,8 @@ RSpec.describe 'api/v1/beboks#update', type: :request do
     patch('update bebok data') do
       tags 'Beboks'
 
+      security [beboks_registry_auth: []]
+
       consumes 'application/json'
       produces 'application/json'
 
@@ -56,6 +58,7 @@ RSpec.describe 'api/v1/beboks#update', type: :request do
         let!(:heart) { create(:heart, bebok: bebok) }
         let(:bebok) { create(:bebok) }
 
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
         let(:id) { bebok.id }
         let(:input) do
           {
@@ -74,6 +77,7 @@ RSpec.describe 'api/v1/beboks#update', type: :request do
       response(404, 'not found') do
         schema '$ref': '#/components/schemas/error_schema'
 
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
         let(:id) { 1 }
         let(:input) { {} }
 

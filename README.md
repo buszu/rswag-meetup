@@ -6,3 +6,4 @@
 3. Beboks - index spec
 4. Beboks - update spec
 5. Beboks - destroy spec
+6. Authorization layer with API Key

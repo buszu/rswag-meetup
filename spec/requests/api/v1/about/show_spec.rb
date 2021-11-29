@@ -8,7 +8,11 @@ RSpec.describe 'api/v1/about#show', type: :request do
       tags 'About'
       produces 'application/json'
 
+      security [beboks_registry_auth: []]
+
       response(200, 'successful') do
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
+
         schema type: :object,
                required: %w[name version],
                properties: {

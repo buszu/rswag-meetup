@@ -9,6 +9,8 @@ RSpec.describe 'api/v1/beboks#create', type: :request do
     post('add a bebok to registry') do
       tags 'Beboks'
 
+      security [beboks_registry_auth: []]
+
       consumes 'application/json'
       produces 'application/json'
 
@@ -46,6 +48,8 @@ RSpec.describe 'api/v1/beboks#create', type: :request do
 
       response(201, 'created') do
         schema '$ref': '#/components/schemas/bebok_schema'
+
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
 
         let(:input) do
           attributes_for(:bebok).slice(:name, :mood).merge(
