@@ -94,6 +94,26 @@ paths:
               schema:
                 "$ref": "#/components/schemas/beboks_schema"
   "/api/v1/beboks/{id}":
+    delete:
+      summary: delete bebok data
+      tags:
+      - Beboks
+      parameters:
+      - name: id
+        in: path
+        description: ID of the bebok data to be deleted
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description: successful
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_schema"
     patch:
       summary: update bebok data
       tags:

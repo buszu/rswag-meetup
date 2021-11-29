@@ -36,7 +36,7 @@ module API
         bebok = Bebok.find(params[:id])
         bebok.destroy
 
-        render json: bebok
+        head :no_content
       end
     end
   end
