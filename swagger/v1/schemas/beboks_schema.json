@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "required": [
+    "beboks"
+  ],
+  "properties": {
+    "beboks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/bebok_schema/properties/bebok"
+      }
+    }
+  }
+}

@@ -71,6 +71,28 @@ paths:
                     bpm:
                       type: integer
                       minimum: 1
+    get:
+      summary: list beboks
+      tags:
+      - Beboks
+      parameters:
+      - name: mood
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - angry
+          - focused
+          - sad
+          - tranquilo
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/beboks_schema"
 servers:
 - url: http://localhost:3000
   description: Localhost
@@ -97,6 +119,15 @@ components:
               "$ref": "#/components/schemas/bebok_moods_enum"
             name:
               type: string
+    beboks_schema:
+      type: object
+      required:
+      - beboks
+      properties:
+        beboks:
+          type: array
+          items:
+            "$ref": "#/components/schemas/bebok_schema/properties/bebok"
     bebok_moods_enum:
       type: string
       enum:
