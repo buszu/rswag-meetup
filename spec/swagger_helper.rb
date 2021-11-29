@@ -28,6 +28,7 @@ RSpec.configure do |config|
       components: {
         schemas: {
           bebok_schema: parse_swagger_schema('bebok_schema'),
+          beboks_schema: parse_swagger_schema('beboks_schema'),
           bebok_moods_enum: {
             type: 'string',
             enum: Constants::Beboks::Moods::LIST
