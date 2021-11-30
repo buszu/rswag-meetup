@@ -28,11 +28,13 @@ RSpec.describe 'api/v1/beboks#update', type: :request do
                   properties: {
                     name: {
                       type: 'string',
+                      example: 'Bebok Niebieski',
                       minLength: 1,
                       maxLength: Beboks::UpdateContract::NAME_MAX_SIZE
                     },
                     mood: {
                       type: 'string',
+                      example: Constants::Beboks::Moods::TRANQUILO,
                       enum: Beboks::UpdateContract::ALLOWED_MOODS
                     },
                     heart: {
@@ -40,10 +42,12 @@ RSpec.describe 'api/v1/beboks#update', type: :request do
                       required: %w[color bpm],
                       properties: {
                         color: {
+                          example: Constants::Hearts::Colors::BLUE,
                           type: 'string',
                           enum: Beboks::UpdateContract::HEART_COLORS
                         },
                         bpm: {
+                          example: 50,
                           type: 'integer',
                           minimum: 1
                         }
