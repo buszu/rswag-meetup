@@ -7,3 +7,4 @@
 4. Beboks - update spec
 5. Beboks - destroy spec
 6. Authorization layer with API Key
+7. Consistency and informativeness
