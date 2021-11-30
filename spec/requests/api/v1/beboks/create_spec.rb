@@ -22,10 +22,12 @@ RSpec.describe 'api/v1/beboks#create', type: :request do
                   properties: {
                     name: {
                       type: 'string',
+                      example: 'Bebok Niebieski',
                       minLength: 1,
                       maxLength: Beboks::CreateContract::NAME_MAX_SIZE
                     },
                     mood: {
+                      example: Constants::Beboks::Moods::TRANQUILO,
                       type: 'string',
                       enum: Beboks::CreateContract::ALLOWED_MOODS
                     },
@@ -34,10 +36,12 @@ RSpec.describe 'api/v1/beboks#create', type: :request do
                       required: %w[color bpm],
                       properties: {
                         color: {
+                          example: Constants::Hearts::Colors::BLUE,
                           type: 'string',
                           enum: Beboks::CreateContract::HEART_COLORS
                         },
                         bpm: {
+                          example: 50,
                           type: 'integer',
                           minimum: 1
                         }
@@ -58,6 +62,30 @@ RSpec.describe 'api/v1/beboks#create', type: :request do
         end
 
         run_test!
+      end
+
+      response(422, 'unprocessable entity') do
+        let(:BeboksRegistryToken) { ENV['BEBOKS_REGISTRY_TOKEN'] }
+
+        let(:valid_input) do
+          attributes_for(:bebok).slice(:name, :mood).merge(
+            heart: attributes_for(:heart).slice(:color, :bpm)
+          )
+        end
+
+        it_behaves_like 'invalid field', description: 'when name is too long' do
+          let(:key) { [:name] }
+          let(:limit) { Beboks::CreateContract::NAME_MAX_SIZE }
+          let(:value) { 'x' * limit.succ }
+          let(:key_message) { "size cannot be greater than #{limit}" }
+        end
+
+        it_behaves_like 'invalid field', description: 'when heart color is unsupported' do
+          let(:key) { %i[heart color] }
+          let(:allowed_values) { Beboks::CreateContract::HEART_COLORS }
+          let(:value) { 'green' }
+          let(:key_message) { "must be one of: #{allowed_values.join(', ')}" }
+        end
       end
     end
   end

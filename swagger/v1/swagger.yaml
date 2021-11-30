@@ -26,6 +26,11 @@ paths:
                     type: string
                   version:
                     type: string
+              examples:
+                successful:
+                  value:
+                    name: 'Rswag Meetup: Example Project'
+                    version: 0.0.0
   "/api/v1/beboks":
     post:
       summary: add a bebok to registry
@@ -41,6 +46,37 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/bebok_schema"
+              examples:
+                created:
+                  value:
+                    bebok:
+                      id: 1
+                      heart:
+                        id: 1
+                        bpm: 45
+                        color: gamma
+                      mood: tranquilo
+                      name: Maciej
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_schema"
+              examples:
+                when name is too long:
+                  value:
+                    error: Validation failed
+                    details:
+                      name:
+                      - size cannot be greater than 150
+                when heart color is unsupported:
+                  value:
+                    error: Validation failed
+                    details:
+                      heart:
+                        color:
+                        - 'must be one of: blue, gamma, red'
       requestBody:
         content:
           application/json:
@@ -53,9 +89,11 @@ paths:
               properties:
                 name:
                   type: string
+                  example: Bebok Niebieski
                   minLength: 1
                   maxLength: 150
                 mood:
+                  example: tranquilo
                   type: string
                   enum:
                   - sad
@@ -67,12 +105,14 @@ paths:
                   - bpm
                   properties:
                     color:
+                      example: blue
                       type: string
                       enum:
                       - blue
                       - gamma
                       - red
                     bpm:
+                      example: 50
                       type: integer
                       minimum: 1
     get:
@@ -99,6 +139,10 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/beboks_schema"
+              examples:
+                successful:
+                  value:
+                    beboks: []
   "/api/v1/beboks/{id}":
     delete:
       summary: delete bebok data
@@ -122,6 +166,10 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_schema"
+              examples:
+                not found:
+                  value:
+                    error: Couldn't find Bebok with id = 1
     patch:
       summary: update bebok data
       tags:
@@ -142,12 +190,27 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/bebok_schema"
+              examples:
+                updated:
+                  value:
+                    bebok:
+                      id: 1
+                      heart:
+                        id: 1
+                        bpm: 120
+                        color: blue
+                      mood: sad
+                      name: updated bebok
         '404':
           description: not found
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_schema"
+              examples:
+                not found:
+                  value:
+                    error: Couldn't find Bebok with id = 1
       requestBody:
         content:
           application/json:
@@ -156,10 +219,12 @@ paths:
               properties:
                 name:
                   type: string
+                  example: Bebok Niebieski
                   minLength: 1
                   maxLength: 150
                 mood:
                   type: string
+                  example: tranquilo
                   enum:
                   - sad
                   - tranquilo
@@ -170,12 +235,14 @@ paths:
                   - bpm
                   properties:
                     color:
+                      example: blue
                       type: string
                       enum:
                       - blue
                       - gamma
                       - red
                     bpm:
+                      example: 50
                       type: integer
                       minimum: 1
 servers:

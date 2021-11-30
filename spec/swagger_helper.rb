@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+
+require 'constants/empty'
 require 'constants/beboks/moods'
 require 'constants/hearts/colors'
 
@@ -52,4 +54,22 @@ RSpec.configure do |config|
   }
 
   config.swagger_format = :yaml
+
+  config.after do |example|
+    next if example.metadata[:example_response] == false ||
+            example.metadata[:response].nil? ||
+            example.metadata[:operation][:produces].nil? ||
+            response.body == Constants::Empty::STRING
+
+    example.metadata[:response][:content] = {
+      example.metadata[:operation][:produces].first => {
+        schema: respond_to?(:example_schema) ? example_schema : example.metadata[:response][:schema],
+        examples: {
+          example.metadata[:example_group][:description] => {
+            value: JSON.parse(response.body, symbolize_names: true)
+          }
+        }
+      }
+    }
+  end
 end
